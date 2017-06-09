@@ -74,3 +74,12 @@ If you haven't enabled the api access to PUB SUB you need to start it.
 Go the API Manager -> Library -> GoogleCloud APIs -> [Cloud Pub/Sub API](https://console.developers.google.com/apis/api/pubsub.googleapis.com/overview?project=pubsub-datatest).
 
 And click ENABLE
+
+## Image Storage.
+
+In Storage -> Storage. Create a new bucket.
+
+Set the parameters as you wish.
+
+Keep the bucket name.
+

@@ -1,3 +1,4 @@
+from datetime import datetime
 from io import BytesIO
 
 import requests
@@ -7,8 +8,8 @@ from PIL import Image
 import os
 UPLOAD_FOLDER = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+"/static/assets"
 IMAGE_ALLOWED_EXTENSIONS = ['png', 'jpg', 'jpeg', 'gif']
-PROJECT_ID = os.environ.get('GOOGLE_PROJECT_ID', 'cpd200-161514')
-CLOUD_STORAGE_BUCKET = os.environ.get('GOOGLE_BUCKET_NAME', 'adoptimizer-turnkey-cocoa-161514')
+PROJECT_ID = os.environ.get('GOOGLE_PROJECT_ID', 'build-156611')
+CLOUD_STORAGE_BUCKET = os.environ.get('GOOGLE_BUCKET_NAME', 'pubsubtest-bucket')
 
 
 def create_client(project_id=PROJECT_ID):
@@ -40,11 +41,10 @@ def resize_image_cloud_storage(url, height=None, width=None, prefix=None):
     thumbnailImage.thumbnail(size)
     # Adjust the image name and convert to jpeg
     thumbnailName = url.split('/')[-1]  #
-    thumbnailFilename = '{prefix}_{filename}.{ext}'.format(prefix=prefix, filename=thumbnailName.split('.')[0], ext='jpg')
+    thumbnailFilename = '{}.jpg'.format(int(datetime.now().timestamp()))   # '{prefix}_{filename}.{ext}'.format(prefix=prefix, filename=thumbnailName.split('.')[0], ext='jpg')
     # Instead of physical save the file, store it as Stream.
     output = BytesIO()
     thumbnailImage.save(output, 'JPEG')
-    """
     # Cloud storage connection.
     blob = storage_connection(thumbnailFilename)
     # And upload it to Cloud Storage
@@ -57,9 +57,3 @@ def resize_image_cloud_storage(url, height=None, width=None, prefix=None):
         url = url.decode('utf-8')
 
     return thumbnailFilename, 'image/jpeg', url
-    """
-    import datetime
-    output.seek(0)
-    path = os.path.join(UPLOAD_FOLDER, '{}.jpg'.format(int(datetime.datetime.now().timestamp())))
-    img = Image.open(output)
-    img.save(path)
