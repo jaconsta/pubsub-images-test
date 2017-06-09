@@ -1,0 +1,9 @@
+.idea
+*.pyc
+.*pycache__.*
+
+/credentials/*
+
+*/venv/*
+
+myParameters.md
