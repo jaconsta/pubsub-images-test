@@ -5,6 +5,8 @@ Listens to the Push/pull subscription queue to read the images files and creates
 """
 from google.cloud import pubsub
 
+from imageReceiver.parsers import process_message
+
 TOPIC_NAME = 'imageThumbnails'
 SUBSCRIPTION_NAME = 'thumbnails_subs'
 
@@ -41,6 +43,7 @@ def subscription_listener(subscription):
 
     for ack_id, message in results:
         print('Message {}: {}, {}'.format(message.message_id, message.data.decode(), message.attributes))
+        process_message(message.data.decode('utf-8'))
 
     # Acknowledge message to confirm received and processing.
     if results:
