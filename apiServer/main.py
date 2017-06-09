@@ -1,7 +1,13 @@
+import json
+from os import environ
+
 from pub_sub.configure import init as topic_init
 
-import json
+from server import app
 
+HOST = environ.get('HOST', '127.0.0.1')
+PORT = int(environ.get('PORT', '4889'))
+DEBUG = True
 
 def main():
     topic = topic_init()
@@ -22,4 +28,5 @@ def main():
 
 if __name__ == '__main__':
     print('Started')
-    main()
+    # main()
+    app.run(host=HOST, debug=DEBUG, port=PORT)

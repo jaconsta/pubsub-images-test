@@ -83,3 +83,11 @@ Set the parameters as you wish.
 
 Keep the bucket name.
 
+## Database integration with Datastore.
+
+Go to Datastore -> entities.
+
+And create a new entity.
+
+Select a region.
+
